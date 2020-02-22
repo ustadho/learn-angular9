@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'learn-angular9';
+  loadedFieature = 'recipe';
+
+  onNavigate(feature: string) {
+    this.loadedFieature = feature;
+  }
 }
