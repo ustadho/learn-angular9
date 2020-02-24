@@ -20,7 +20,7 @@ export class RecipeEditComponent implements OnInit {
         this.editMode = params['id'] != null;
         console.log('editMode: ' + this.editMode);
       }
-    )
+    );
   }
 
 }

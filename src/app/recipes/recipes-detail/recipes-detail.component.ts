@@ -1,7 +1,7 @@
 import { RecipeService } from './../recipes-list/recipe.service';
 import { Recipe } from './../recipe.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes-detail',
@@ -13,7 +13,8 @@ export class RecipesDetailComponent implements OnInit {
   id: number;
 
   constructor(private recipeService: RecipeService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.params
@@ -25,7 +26,13 @@ export class RecipesDetailComponent implements OnInit {
     );
   }
 
+  onEditRecipe() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
+  }
   onAddToShoppingList() {
-    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+    // kenapa kita tidak butuh id lagi
+    // this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+
+    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
   }
 }
