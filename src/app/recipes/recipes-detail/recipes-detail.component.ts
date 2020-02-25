@@ -31,7 +31,7 @@ export class RecipesDetailComponent implements OnInit {
   }
   onAddToShoppingList() {
     // kenapa kita tidak butuh id lagi
-    // this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
 
     // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
   }
