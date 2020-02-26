@@ -8,25 +8,25 @@ import { Ingredient } from 'src/app/shared/ingredient.model';
 export class RecipeService {
   receipeChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Recipe 1',
-      'Recipe 1 testing',
-      'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
-      [
-        new Ingredient('Meat', 1),
-        new Ingredient('French Fries', 20),
-      ]),
-    new Recipe(
-      'Recipe 2',
-      'Recipe 2 testing',
-      'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
-      [
-        new Ingredient('Buns', 2),
-        new Ingredient('Meat', 1),
-      ])
-  ];
-
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Recipe 1',
+  //     'Recipe 1 testing',
+  //     'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
+  //     [
+  //       new Ingredient('Meat', 1),
+  //       new Ingredient('French Fries', 20),
+  //     ]),
+  //   new Recipe(
+  //     'Recipe 2',
+  //     'Recipe 2 testing',
+  //     'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
+  //     [
+  //       new Ingredient('Buns', 2),
+  //       new Ingredient('Meat', 1),
+  //     ])
+  // ];
+  private recipes: Recipe[] = [];
   constructor(private slService: ShoppingListService) {}
 
   setRecipes(recipes: Recipe[]) {
