@@ -26,8 +26,7 @@ export class DataStorageService {
       }); // map here is javascript method
     }),
     tap(recipes => {
-      console.log('fetchRecipes', recipes);
-      this.recipeService.setRecipes(recipes);
+       this.recipeService.setRecipes(recipes);
     })
     );
   }
