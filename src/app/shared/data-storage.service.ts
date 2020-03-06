@@ -22,10 +22,11 @@ export class DataStorageService {
     return this.http.get<Recipe[]>('https://ustadho-course-recipe-book.firebaseio.com/recipes.json')
     .pipe(map(recipes => {
       return recipes.map(recipe => {
-        return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []}
+        return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
       }); // map here is javascript method
     }),
     tap(recipes => {
+      console.log('fetchRecipes', recipes);
       this.recipeService.setRecipes(recipes);
     })
     );
