@@ -14,9 +14,11 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './shared/dropdown.directive';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { StoreModule } from '@ngrx/store';
+import { ShoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -30,16 +32,18 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     HeaderComponent,
     DropdownDirective,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({shoppingList: ShoppingListReducer})
   ],
-  providers: [ShoppingListService, RecipeService],
+  providers: [RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
