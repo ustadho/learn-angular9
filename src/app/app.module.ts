@@ -1,3 +1,4 @@
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { RecipeService } from './recipes/recipes-list/recipe.service';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,7 +34,8 @@ import { AuthComponent } from './auth/auth.component';
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
-    AuthComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
