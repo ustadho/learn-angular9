@@ -21,6 +21,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { StoreModule } from '@ngrx/store';
 import { ShoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 import { AuthComponent } from './auth/auth.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AuthComponent } from './auth/auth.component';
     RecipeStartComponent,
     RecipeEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
