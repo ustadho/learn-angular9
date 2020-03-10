@@ -1,3 +1,4 @@
+import { LoggingService } from './../logging.service';
 import { Subscription, Observable } from 'rxjs';
 import { Ingredient } from './../shared/ingredient.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -15,10 +16,12 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Observable<{ ingredients: Ingredient[] }>;
   private igChangeSub: Subscription;
   constructor(
-    private store: Store<fromShoppingList.AppState>) { }
+    private store: Store<fromShoppingList.AppState>,
+    private loggingService: LoggingService) { }
 
   ngOnInit(): void {
     this.ingredients = this.store.select('shoppingList');
+    this.loggingService.printLog('Hello from ShoppingListComponent ngOnInit');
     // this.ingredients = this.slService.getIngredients();
     // this.igChangeSub = this.slService.ingredientChanged.subscribe(
     //   (igs: Ingredient[]) => {
