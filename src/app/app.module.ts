@@ -58,6 +58,7 @@ import { AlertComponent } from './shared/alert/alert.component';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AlertComponent]
 })
 export class AppModule { }
