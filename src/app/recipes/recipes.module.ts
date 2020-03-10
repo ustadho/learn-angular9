@@ -24,14 +24,6 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     ReactiveFormsModule,
     RecipesRoutingModule
-  ],
-  exports: [
-    RecipesComponent,
-    RecipesListComponent,
-    RecipesDetailComponent,
-    RecipeItemComponent,
-    RecipeStartComponent,
-    RecipeEditComponent
   ]
 })
 export class RecipesModule {
