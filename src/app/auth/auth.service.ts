@@ -5,7 +5,7 @@ import { User } from './user.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import { throwError } from 'rxjs';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
 
@@ -85,7 +85,7 @@ export class AuthService {
     );
     if (loadedUser.token) {
       // this.user.next(loadedUser);
-      this.store.dispatch(new AuthActions.Login(
+      this.store.dispatch(new AuthActions.AuthenticateSuccess(
         {
           email: loadedUser.email,
           userId: loadedUser.id,
@@ -113,7 +113,7 @@ export class AuthService {
       expirationDate
     );
     // this.user.next(user);
-    this.store.dispatch(new AuthActions.Login({
+    this.store.dispatch(new AuthActions.AuthenticateSuccess({
       email: email,
       userId: userId,
       token: token,
