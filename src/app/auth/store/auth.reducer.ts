@@ -2,11 +2,14 @@ import { User } from './../user.model';
 import * as AuthActions from './auth.actions';
 export interface State {
   user: User;
+  authError: string;
 }
 
 const intialState: State = {
-  user: null
-}
+  user: null,
+  authError: null
+};
+
 export function authReducer(
   state = intialState,
   action: AuthActions.AuthActions
@@ -21,12 +24,18 @@ export function authReducer(
       );
       return {
         ...state,
+        authError: null,
         user: user
       };
     case AuthActions.LOGOUT:
       return {
         ...state,
         user: null
+      };
+    case AuthActions.LOGIN_START:
+      return {
+        ...state,
+        authEror: null
       };
     default:
       return state;
