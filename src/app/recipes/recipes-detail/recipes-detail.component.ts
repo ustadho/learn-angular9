@@ -1,7 +1,10 @@
+import { map, switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { RecipeService } from './../recipes-list/recipe.service';
 import { Recipe } from './../recipe.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import * as fromApp from '../../store/app.reducer';
 
 @Component({
   selector: 'app-recipes-detail',
@@ -14,16 +17,40 @@ export class RecipesDetailComponent implements OnInit {
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        this.id = +params['id'];
-        this.recipe = this.recipeService.getRecipe(this.id);
-      }
-    );
+    this.route.params.pipe(map(params => {
+      return +params.id;
+    }), switchMap(id => {
+      this.id = id;
+      return this.store.select('recipes');
+    }),
+    map(recipeState => {
+      return recipeState.recipes.find((recipe, index) => {
+        return index === this.id;
+      });
+    })).subscribe(recipe => {
+      this.recipe = recipe;
+    });
+    // atau bisa juga dengan cara berikut
+    // this.route.params
+    // .subscribe(
+    //   (params: Params) => {
+    //     this.id = +params['id'];
+    //     // this.recipe = this.recipeService.getRecipe(this.id);
+    //     this.store.select('recipes').pipe(
+    //       map(recipeState => {
+    //         return recipeState.recipes.find((recipe, index) => {
+    //           return index === this.id;
+    //         });
+    //       })
+    //     ).subscribe(recipe => {
+    //       this.recipe = recipe;
+    //     });
+    //   }
+    // );
   }
 
   onEditRecipe() {
