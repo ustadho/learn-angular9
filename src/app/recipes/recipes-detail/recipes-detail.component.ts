@@ -1,11 +1,11 @@
 import { map, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { RecipeService } from './../recipes-list/recipe.service';
 import { Recipe } from './../recipe.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as fromApp from '../../store/app.reducer';
 import * as RecipesActions from '../store/recipe.actions';
+import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
 
 @Component({
   selector: 'app-recipes-detail',
@@ -16,10 +16,9 @@ export class RecipesDetailComponent implements OnInit {
   recipe: Recipe;
   id: number;
 
-  constructor(private recipeService: RecipeService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private store: Store<fromApp.AppState>) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
     this.route.params.pipe(map(params => {
@@ -28,13 +27,13 @@ export class RecipesDetailComponent implements OnInit {
       this.id = id;
       return this.store.select('recipes');
     }),
-    map(recipeState => {
-      return recipeState.recipes.find((recipe, index) => {
-        return index === this.id;
+      map(recipeState => {
+        return recipeState.recipes.find((recipe, index) => {
+          return index === this.id;
+        });
+      })).subscribe(recipe => {
+        this.recipe = recipe;
       });
-    })).subscribe(recipe => {
-      this.recipe = recipe;
-    });
     // atau bisa juga dengan cara berikut
     // this.route.params
     // .subscribe(
@@ -55,13 +54,12 @@ export class RecipesDetailComponent implements OnInit {
   }
 
   onEditRecipe() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
   onAddToShoppingList() {
-    // kenapa kita tidak butuh id lagi
-    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
-
-    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
+    this.store.dispatch(
+      new ShoppingListActions.AddIngredients(this.recipe.ingredients)
+    );
   }
 
   onDeleteRecipe() {

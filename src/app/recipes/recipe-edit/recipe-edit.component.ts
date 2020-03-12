@@ -1,7 +1,5 @@
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { Recipe } from './../recipe.model';
-import { RecipeService } from './../recipes-list/recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
@@ -20,13 +18,14 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   recipeForm: FormGroup;
   private storeSub: Subscription;
 
-  constructor(private route: ActivatedRoute,
-    private recipeService: RecipeService,
+  constructor(
+    private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromApp.AppState>) { }
+    private store: Store<fromApp.AppState>
+  ) { }
 
   getControls(frmGrp: FormGroup, key: string) {
-    return (<FormArray>frmGrp.controls[key]).controls;
+    return (frmGrp.controls[key] as FormArray).controls;
   }
 
   ngOnInit(): void {

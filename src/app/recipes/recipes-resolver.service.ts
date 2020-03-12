@@ -1,8 +1,6 @@
 import { take, map, switchMap } from 'rxjs/operators';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { RecipeService } from './recipes-list/recipe.service';
-import { DataStorageService } from './../shared/data-storage.service';
 import { Recipe } from './recipe.model';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
