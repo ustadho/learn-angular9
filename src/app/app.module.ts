@@ -1,4 +1,3 @@
-import { AuthEffects } from './auth/store/auth.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import { environment } from '../environments/environment';
+import { AuthEffects } from './auth/store/auth.effects';
+import { RecipeEffects } from './recipes/store/recipe.effect';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { environment } from '../environments/environment';
     SharedModule,
     CoreModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot()
   ],
